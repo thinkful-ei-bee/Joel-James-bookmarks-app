@@ -58,10 +58,19 @@
 
           <li>
             <form>
-              <p>Bookmark Title</p>
+              <p>Create a Bookmark</p>
               <div class="bookmark-title">
 
-
+                <div class="form-group">
+                  <div class="col">
+                      <label for="title">Title:</label>
+                      <input id="title" type="text">
+                  </div>
+                  <div class="col">
+                    <label for="url">Url:</label>
+                    <input id="url" type="text">
+                  </div>
+                </div>
 
                 <div class="form-group">
                   <div class="col">
@@ -80,12 +89,18 @@
                     <li><input type="radio" name="rating" value="" checked>5<br></li>
                   </ul>
                 </div>
-                  <div class="form-group">
-                    <div class="col">
-                      <input type="submit" value="Delete">
-                    </div>
-                  </div>  
+
+                <div class="form-group">
+                  <div class="col">
+                    <input type="submit" value="Save">
+                  </div>
+                  <div class="col">
+                    <input type="submit" value="Cancel">
+                  </div>
                 </div>
+              </div>
+              <div class="bookmark-rating">
+
               </div>
             </form>
           </li>
