@@ -4,7 +4,7 @@ const bookmarkList = (function() {
 
   // template functions here
 
-  
+
 
   // renderer:
   function render() {
@@ -12,7 +12,10 @@ const bookmarkList = (function() {
   }
 
   function handleAddBookmark() {
-
+    $('#add-bookmark').click((event) => {
+      event.preventDefault();
+      console.log('hi');
+    });
   }
   
   function handleMinRating() {
@@ -32,7 +35,7 @@ const bookmarkList = (function() {
   }
   
   function handleExpandBookmark() {
-  
+    
   }
   
   function bindEventListeners() {
@@ -45,8 +48,8 @@ const bookmarkList = (function() {
   }
 
   return {
-    render,
-    bindEventListeners,
+    render: render,
+    bindEventListeners: bindEventListeners,
   };
 
 }());
