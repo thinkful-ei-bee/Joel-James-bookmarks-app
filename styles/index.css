@@ -58,3 +58,15 @@ textarea {
 .bookmark-rating {
   display: flex;
 }
+
+/* error box for top of page */
+#errors {
+  display: none;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 10vh;
+  background-color: white;
+  text-align: center;
+  border-bottom: 1px black solid;
+}
