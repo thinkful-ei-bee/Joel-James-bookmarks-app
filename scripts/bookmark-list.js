@@ -12,10 +12,14 @@ const bookmarkList = (function() {
   }
 
   function handleAddBookmark() {
+
     $('#add-bookmark').click((event) => {
       event.preventDefault();
       console.log('hi');
     });
+
+    
+
   }
   
   function handleMinRating() {
@@ -23,7 +27,10 @@ const bookmarkList = (function() {
   }
   
   function handleSaveBookmark() {
-  
+    $('#add-bookmark').on('click', 'create-bookmark-save', (event) => {
+      event.preventDefault();
+      console.log('hi');
+    });
   }
   
   function handleCancelBookmark() {
