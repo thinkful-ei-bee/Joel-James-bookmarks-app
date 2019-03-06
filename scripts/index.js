@@ -4,14 +4,23 @@
 
 //function main() {
 $(document).ready(function() {
+
+  console.log('derp');
+
   bookmarkList.bindEventListeners();
 
-  api.getBookmarks((bookmarks) => {
-    bookmarks.forEach((bookmark) => store.addBook(bookmark));
-    console.log(store.bookmarks);
-  });
+  api.getBookmarks()
+    .then((bookmarks) => {
+      bookmarks.forEach(bookmark => {
+        store.addBookmark(bookmark);
+        // do other stuff
+        console.log(store.bookmarks);
+        // call render
 
+      });
+    });
+
+  
 });
-
 
 //$(main);

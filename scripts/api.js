@@ -3,10 +3,10 @@
 /* global store */
 
 const api = (function(){
-  const baseUrl = 'https://thinkful-list-api.herokuapp.com/joel-james';
+  const baseUrl = 'https://thinkful-list-api.herokuapp.com/james-joel';
   
   function getBookmarks() {
-    return bookmarkApiFetch(`${baseUrl}`);
+    return bookmarkApiFetch(`${baseUrl}/bookmarks`);
   }
   
   function createBookmark(name) {
@@ -52,7 +52,7 @@ const api = (function(){
         return res.json();
       })
       .then(data => {
-
+        //console.log(data);
         if (error) {
           error.message = data.message;
           return Promise.reject(error);
