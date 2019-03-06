@@ -59,13 +59,13 @@ const bookmarkList = (function() {
       event.preventDefault();
       console.log('hi');
     });
-
-    
-
   }
   
   function handleMinRating() {
-  
+    $('#rating').change(() => {
+      store.filterRating = $('#rating').val();
+      render();
+    });
   }
   
   function handleSaveBookmark() {
