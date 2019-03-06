@@ -1,9 +1,10 @@
 'use strict';
 
-/* global bookmarkList */
-
-$(document).ready(function() {
-
+$(function() {
   bookmarkList.bindEventListeners();
 
+  api.getItems((items) => {
+      items.forEach((item) => store.addItem(item));
+      bookmarkList.render();
+  });
 });
