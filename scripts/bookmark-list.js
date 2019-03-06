@@ -27,7 +27,7 @@ const bookmarkList = (function() {
   }
   
   function handleSaveBookmark() {
-    $('#bookmarks-list').on('click', 'create-bookmark-save', (event) => {
+    $('#bookmarks-list').on('click', '#create-bookmark-save', (event) => {
       event.preventDefault();
       console.log('hi');
     });
