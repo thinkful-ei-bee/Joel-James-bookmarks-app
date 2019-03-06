@@ -2,8 +2,7 @@
 
 /* global bookmarkList, store, api */
 
-//function main() {
-$(document).ready(function() {
+function main() {
 
   console.log('derp');
 
@@ -20,7 +19,6 @@ $(document).ready(function() {
       });
     });
 
-  
-});
+}
 
-//$(main);
+$(main);
