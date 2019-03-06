@@ -49,7 +49,7 @@ const bookmarkList = (function() {
     let ratingList = [];
     let count = 0;
     for (let i = 0; i <= rating; i++) {
-      if(count >= rating -1) {
+      if(count >= rating) {
         ratingList[i] = '<li><i class="far fa-star"></i></li>';
       }
       else {
@@ -57,7 +57,7 @@ const bookmarkList = (function() {
       }
       count++;
     }
-    return ratingList.toString('');
+    return ratingList.join('');
   }
 
   function generateExpandedBookmark() {
