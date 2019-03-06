@@ -40,6 +40,7 @@ const store = (function(){
     findAndDelete,
     toggleFilterRating,
     setBookmarkExpand,
+    filterRating: 3,
   };
 
 }());

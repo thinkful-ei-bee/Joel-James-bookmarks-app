@@ -8,15 +8,19 @@ function main() {
 
   bookmarkList.bindEventListeners();
 
+  // Get remote bookmarks
   api.getBookmarks()
     .then((bookmarks) => {
-      bookmarks.forEach(bookmark => {
-        store.addBookmark(bookmark);
-        // do other stuff
-        console.log(store.bookmarks);
-        // call render
 
-      });
+      // Update local store.bookmarks array with remote values 
+      bookmarks.forEach(bookmark => store.addBookmark(bookmark));
+
+      // Listen for clicks
+      bookmarkList.bindEventListeners();
+
+      //
+      bookmarkList.render();
+
     });
 
 }

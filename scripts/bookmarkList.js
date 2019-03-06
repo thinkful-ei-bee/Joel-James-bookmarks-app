@@ -1,29 +1,8 @@
 'use strict';
 
+/* global store */
+
 const bookmarkList = (function() {
-
-  // useless ref code
-  //   return `
-  //   <li>
-  //   <form>
-    
-  //     <div class="bookmark-title">
-  //       <p>${bookmark.title}</p>
-        
-  //       <div class="form-group">
-  //         <ul class="bookmark-rating">
-  //           <li><i class="fas fa-star"></i></li>
-  //           <li><i class="fas fa-star"></i></li>
-  //           <li><i class="fas fa-star"></i></li>
-  //           <li><i class="fas fa-star"></i></li>
-  //           <li><i class="far fa-star"></i></li>
-  //         </ul>
-  //       </div>
-
-  //     </div>
-  //   </form>
-  // </li>`;
-
 
   function generateBookmarkElement(bookmark) {
     
@@ -70,7 +49,8 @@ const bookmarkList = (function() {
 
   // renderer:
   function render() {
-
+    let bookmarksToRender = store.bookmarks.filter( bookmark => bookmark.rating <= store.filterRating );
+    console.log(bookmarksToRender);
   }
 
   function handleAddBookmark() {
@@ -97,8 +77,8 @@ const bookmarkList = (function() {
   
   function handleCancelBookmark() {
     $('#bookmarks-list').on('click', '#create-bookmark-cancel', event => {
-    event.preventDefault();
-    store.addBookmark = false;
+      event.preventDefault();
+      store.addBookmark = false;
     });
   }
   
