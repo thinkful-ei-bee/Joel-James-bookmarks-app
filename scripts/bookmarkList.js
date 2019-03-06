@@ -2,6 +2,34 @@
 
 const bookmarkList = (function() {
 
+  function generateBookmarkElement(bookmark) {
+    
+    return `
+    <li>
+    <form>
+     
+      <div class="bookmark-title">
+        <p>${bookmark.title}</p>
+        
+        <div class="form-group">
+          <ul class="bookmark-rating">
+            <li><i class="fas fa-star"></i></li>
+            <li><i class="fas fa-star"></i></li>
+            <li><i class="fas fa-star"></i></li>
+            <li><i class="fas fa-star"></i></li>
+            <li><i class="far fa-star"></i></li>
+          </ul>
+        </div>
+
+      </div>
+    </form>
+  </li>`;
+  }
+
+  function generateExpandedBookmark() {
+
+  }
+
   // template functions here
 
 
@@ -34,7 +62,10 @@ const bookmarkList = (function() {
   }
   
   function handleCancelBookmark() {
-  
+    $('#bookmarks-list').on('click', '#create-bookmark-cancel', event => {
+    event.preventDefault();
+    store.addBookmark = false;
+    });
   }
   
   function handleDeleteBookmark() {
