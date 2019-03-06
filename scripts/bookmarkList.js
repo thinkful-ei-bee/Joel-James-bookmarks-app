@@ -2,6 +2,29 @@
 
 const bookmarkList = (function() {
 
+  // useless ref code
+  //   return `
+  //   <li>
+  //   <form>
+    
+  //     <div class="bookmark-title">
+  //       <p>${bookmark.title}</p>
+        
+  //       <div class="form-group">
+  //         <ul class="bookmark-rating">
+  //           <li><i class="fas fa-star"></i></li>
+  //           <li><i class="fas fa-star"></i></li>
+  //           <li><i class="fas fa-star"></i></li>
+  //           <li><i class="fas fa-star"></i></li>
+  //           <li><i class="far fa-star"></i></li>
+  //         </ul>
+  //       </div>
+
+  //     </div>
+  //   </form>
+  // </li>`;
+
+
   function generateBookmarkElement(bookmark) {
     
     return `
@@ -13,17 +36,28 @@ const bookmarkList = (function() {
         
         <div class="form-group">
           <ul class="bookmark-rating">
-            <li><i class="fas fa-star"></i></li>
-            <li><i class="fas fa-star"></i></li>
-            <li><i class="fas fa-star"></i></li>
-            <li><i class="fas fa-star"></i></li>
-            <li><i class="far fa-star"></i></li>
+            ${generateBookMarkElementRatingHelper(bookmark.rating)}
           </ul>
         </div>
 
       </div>
     </form>
   </li>`;
+  }
+
+  function generateBookMarkElementRatingHelper(rating) {
+    let ratingList = [];
+    let count = 0;
+    for (let i = 0; i <= rating; i++) {
+      if(count >= rating -1) {
+        ratingList[i] = '<li><i class="far fa-star"></i></li>';
+      }
+      else {
+        ratingList[i] = '<li><i class="fas fa-star"></i></li>';
+      }
+      count++;
+    }
+    return ratingList.toString('');
   }
 
   function generateExpandedBookmark() {
@@ -86,6 +120,7 @@ const bookmarkList = (function() {
   }
 
   return {
+    generateBookmarkElement,
     render: render,
     bindEventListeners: bindEventListeners,
   };
