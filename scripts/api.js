@@ -47,7 +47,7 @@ const api = (function(){
       .then(res => {
         if(!res.ok) {
           error = { code: res.status };
-          StorageEvent.error = error;
+          store.error = error;
         }
         return res.json();
       })
