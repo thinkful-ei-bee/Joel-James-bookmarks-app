@@ -39,25 +39,86 @@ const bookmarkList = (function() {
     return ratingList.join('');
   }
 
-  function generateExpandedBookmark() {
+  function generateAddBookmarkHTML() {
+    return `
+    <li>
+    <form>
+      <p>Create a Bookmark</p>
+      <div class="bookmark-title">
 
+        <div class="form-group">
+          <div class="col">
+              <label for="title">Title:</label>
+              <input id="title" type="text">
+          </div>
+          <div class="col">
+            <label for="url">Url:</label>
+            <input id="url" type="text">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col">
+              <label for="description">Description:</label><br>
+              <textarea id="description"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col">
+            <input id="create-bookmark-save" type="submit" value="Save">
+          </div>
+          <div class="col">
+            <input id="create-bookmark-cancel" type="submit" value="Cancel">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <ul class="bookmark-rating">
+            Rating:
+            <li><input type="radio" name="rating" value="" checked>1<br></li>
+            <li><input type="radio" name="rating" value="" checked>2<br></li>
+            <li><input type="radio" name="rating" value="" checked>3<br></li>
+            <li><input type="radio" name="rating" value="" checked>4<br></li>
+            <li><input type="radio" name="rating" value="" checked>5<br></li>
+          </ul>
+        </div>
+
+      </div>
+    </form>
+  </li>`;
   }
 
-  // template functions here
+  function generateExpandedBookmarkHTML() {
+    
+  }
 
-
+  function  generateBookmarks(list) {
+    const bookmarks = list.map( function(bookmark) {
+        if (bookmark.expand === true) {
+            return generateExpandedBookmarkHTML(bookmark);
+        } else {
+            return generateBookmarkHTML(bookmark);
+        }
+    });
+    return bookmarks.join('');
+};
 
   // renderer:
   function render() {
-    let bookmarksToRender = store.bookmarks.filter( bookmark => bookmark.rating <= store.filterRating );
-    console.log(bookmarksToRender);
+    let bookmarks = store.bookmarks.filter( bookmark => bookmark.rating <= store.filterRating );
+
+    const html = generateBookmarks(bookmarks);
+    $('#bookmarks').html(html);
   }
 
   function handleAddBookmark() {
-
     $('#add-bookmark').click((event) => {
       event.preventDefault();
-      console.log('hi');
+      const newBookmarkHTML = generateAddBookmarkHTML();
+      $('#bookmarks').html(newBookmarkHTML);
+      handleSaveBookmark();
+      handleCancelBookmark();
     });
   }
   
