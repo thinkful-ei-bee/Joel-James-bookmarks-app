@@ -100,7 +100,8 @@ const bookmarkList = (function() {
 
 
       </form>
-    </li>`;
+    </li>
+    <hr>`;
   }
 
   function generateBookMarkElementRatingHelper(rating) {
