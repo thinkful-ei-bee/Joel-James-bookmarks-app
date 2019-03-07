@@ -6,7 +6,6 @@ const bookmarkList = (function() {
 
   function generateAddBookmarkHTML() {
     return `
-    <li>
     <form>
       <p>Create a Bookmark</p>
       <div class="bookmark-title">
@@ -50,8 +49,7 @@ const bookmarkList = (function() {
         </div>
 
       </div>
-    </form>
-  </li>`;
+    </form>`;
   }
 
   function generateBookmarkElementExpanded(bookmark) {
@@ -152,7 +150,7 @@ const bookmarkList = (function() {
     $('#add-bookmark').click((event) => {
       event.preventDefault();
       const newBookmarkHTML = generateAddBookmarkHTML();
-      $('#bookmarks').html(newBookmarkHTML);
+      $('#bookmarks-add').html(newBookmarkHTML);
       handleSaveBookmark();
       handleCancelBookmark();
     });
