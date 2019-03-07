@@ -5,7 +5,16 @@
 const store = (function(){
 
   const addBookmark = function(bookmark) {
-    this.bookmarks.push(bookmark);
+    this.bookmarks.push(
+      {
+        'id':           bookmark.id,
+        'title':        bookmark.title,
+        'rating':       bookmark.rating,
+        'url':          bookmark.url,
+        'description':  bookmark.desc,
+        'exanded':      false,
+      }
+    );
   };
 
   const findById = function(id) {
