@@ -58,43 +58,31 @@ const bookmarkList = (function() {
     return `
     <li data-item-id="${bookmark.id}">
       <form>
-        <p><a class="bookmark-title-link" href="${bookmark.url}">${bookmark.title}</a></p>
-        <div class="bookmark-title">
 
-          <div class="form-group">
-            <div class="col">
-                <label for="title">Title:</label>
-                <input id="title" type="text">
-            </div>
-            <div class="col">
-              <label for="url">Url:</label>
-              <input id="url" type="text">
-            </div>
-          </div>
+        <p>${bookmark.title}<p>
 
-          <div class="form-group">
-            <div class="col">
-                <label for="description">Description:</label><br>
-                <textarea id="description"></textarea>
-            </div>
+        <div class="form-group">
+          <div class="col">
+              <label for="description">Description:</label><br>
+              <textarea id="description"></textarea>
           </div>
-
-          <div class="form-group">
-            <div class="col">
-              <a href="">Visit Site</a>
-            </div>
-            <div class="col">
-              <input type="submit" value="Delete">
-            </div>
-          </div>
-          
-          <div class="form-group">
-            <ul class="bookmark-rating">
-              ${generateBookMarkElementRatingHelper(bookmark.rating)}
-            </ul>
-          </div>
-
         </div>
+
+        <div class="form-group">
+          <div class="col">
+          <a class="bookmark-title-link" href="${bookmark.url}">Vist site</a>
+          </div>
+          <div class="col">
+            <input type="submit" value="Delete">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <ul class="bookmark-rating">
+            ${generateBookMarkElementRatingHelper(bookmark.rating)}
+          </ul>
+        </div>
+
       </form>
     </li>`;
   }
@@ -104,16 +92,15 @@ const bookmarkList = (function() {
     <li data-item-id="${bookmark.id}">
       <form>
       
-        <div class="bookmark-title">
-          <p><a class="bookmark-title-link" href="${bookmark.url}">${bookmark.title}</a></p>
-          
-          <div class="form-group">
-            <ul class="bookmark-rating">
-              ${generateBookMarkElementRatingHelper(bookmark.rating)}
-            </ul>
-          </div>
-
+        <p><a class="bookmark-title-link" href="">${bookmark.title}</a></p>
+        
+        <div class="form-group">
+          <ul class="bookmark-rating">
+            ${generateBookMarkElementRatingHelper(bookmark.rating)}
+          </ul>
         </div>
+
+
       </form>
     </li>`;
   }
