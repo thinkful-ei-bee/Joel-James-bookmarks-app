@@ -107,7 +107,7 @@ const bookmarkList = (function() {
   function generateBookMarkElementRatingHelper(rating) {
     let ratingList = [];
     let count = 0;
-    for (let i = 0; i <= rating; i++) {
+    for (let i = 0; i <= rating - 1; i++) {
       if(count >= rating) {
         ratingList[i] = '<li><i class="far fa-star"></i></li>';
       }
@@ -135,15 +135,12 @@ const bookmarkList = (function() {
     return bookmarks;
   }
 
-  
-
   function render() {
     // Filter on each call of render for the bookmarks we want
     let bookmarks = store.bookmarks.filter( bookmark => bookmark.rating <= store.filterRating );
 
     const html = generateBookmarkItems(bookmarks);
     $('#bookmarks-list').html(html);
-
     
   }
 
