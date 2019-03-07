@@ -12,19 +12,19 @@ const bookmarkList = (function() {
 
         <div class="form-group">
           <div class="col">
-              <label for="title">Title:</label>
-              <input id="title" type="text">
+              <label for="bookmark-title-add">Title:</label>
+              <input id="bookmark-title-add" type="text">
           </div>
           <div class="col">
-            <label for="url">Url:</label>
-            <input id="url" type="text">
+            <label for="bookmark-url-add">Url:</label>
+            <input id="bookmark-url-add" type="text">
           </div>
         </div>
 
         <div class="form-group">
           <div class="col">
-              <label for="description">Description:</label><br>
-              <textarea id="description"></textarea>
+              <label for="bookmark-description-add">Description:</label><br>
+              <textarea id="bookmark-description-add"></textarea>
           </div>
         </div>
 
@@ -166,7 +166,10 @@ const bookmarkList = (function() {
   function handleSaveBookmark() {
     $('#bookmarks-add').on('click', '#create-bookmark-save', (event) => {
       event.preventDefault();
-      console.log('hi');
+      let title = $('#bookmark-title-add').val();
+      let url = $('#bookmark-url-add').val();
+      let description = $('#bookmark-description-add').val();
+      console.log(` ${title} ${url} ${description} `);
     });
   }
   
