@@ -151,8 +151,8 @@ const bookmarkList = (function() {
       event.preventDefault();
       const newBookmarkHTML = generateAddBookmarkHTML();
       $('#bookmarks-add').html(newBookmarkHTML);
-      handleSaveBookmark();
-      handleCancelBookmark();
+      // handleSaveBookmark();
+      // handleCancelBookmark();
     });
   }
   
@@ -173,8 +173,7 @@ const bookmarkList = (function() {
   function handleCancelBookmark() {
     $('#bookmarks-add').on('click', '#create-bookmark-cancel', event => {
       event.preventDefault();
-      store.addBookmark = false;
-
+      $('#bookmarks-add').html('');
     });
   }
   
