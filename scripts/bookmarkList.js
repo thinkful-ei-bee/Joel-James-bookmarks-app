@@ -60,7 +60,7 @@ const bookmarkList = (function() {
       <form>
 
         <p><a class="bookmark-title-link" href="">${bookmark.title}</a><p>
-        
+
         <div class="col">
           <p>${bookmark.description}</p>
         </div>
@@ -142,6 +142,8 @@ const bookmarkList = (function() {
 
     const html = generateBookmarkItems(bookmarks);
     $('#bookmarks-list').html(html);
+
+    
   }
 
   function getItemIdFromElement(item) {

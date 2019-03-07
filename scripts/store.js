@@ -34,11 +34,10 @@ const store = (function(){
   };
 
   const setBookmarkExpanded = function(id) {
-    // if(this.expanded === id){
-    //   this.expanded = null;
-    //   return;
-    // }
-    this.expanded = id;
+    if(this.expanded === null) {
+      this.expanded = id;
+    }
+    // additional logic could follow here
   };
 
   return {
