@@ -18,6 +18,9 @@ function main() {
       // Listen for clicks
       bookmarkList.bindEventListeners();
 
+      // Take data return from API and transform to HTML
+      bookmarkList.generateBookmarkItems(store.bookmarks);
+
       //
       bookmarkList.render();
 

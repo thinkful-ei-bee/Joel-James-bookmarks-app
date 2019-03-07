@@ -7,7 +7,7 @@ const bookmarkList = (function() {
   function generateBookmarkElement(bookmark) {
     
     return `
-    <li>
+    <li data-item-id="${bookmark.id}">
     <form>
      
       <div class="bookmark-title">
@@ -37,6 +37,11 @@ const bookmarkList = (function() {
       count++;
     }
     return ratingList.join('');
+  }
+
+  function generateBookmarkItems(bookmarkList) {
+    const bookmarks = store.bookmarks.map(bookmark => generateBookmarkElement(bookmark));
+    return bookmarks.join('');
   }
 
   function generateAddBookmarkHTML() {
@@ -89,27 +94,27 @@ const bookmarkList = (function() {
   </li>`;
   }
 
-  function generateExpandedBookmarkHTML() {
+  // function generateExpandedBookmarkHTML() {
     
-  }
+  // }
 
-  function  generateBookmarks(list) {
-    const bookmarks = list.map( function(bookmark) {
-        if (bookmark.expand === true) {
-            return generateExpandedBookmarkHTML(bookmark);
-        } else {
-            return generateBookmarkHTML(bookmark);
-        }
-    });
-    return bookmarks.join('');
-};
+  // function  generateBookmarks(list) {
+  //   const bookmarks = list.map( function(bookmark) {
+  //     if (bookmark.expand === true) {
+  //       return generateExpandedBookmarkHTML(bookmark);
+  //     } else {
+  //       return generateBookmarkHTML(bookmark);
+  //     }
+  //   });
+  //   return bookmarks.join('');
+  // }
 
   // renderer:
   function render() {
     let bookmarks = store.bookmarks.filter( bookmark => bookmark.rating <= store.filterRating );
 
-    const html = generateBookmarks(bookmarks);
-    $('#bookmarks').html(html);
+    const html = generateBookmarkItems(bookmarks);
+    $('#bookmarks-list').html(html);
   }
 
   function handleAddBookmark() {
@@ -162,6 +167,7 @@ const bookmarkList = (function() {
 
   return {
     generateBookmarkElement,
+    generateBookmarkItems,
     render: render,
     bindEventListeners: bindEventListeners,
   };
