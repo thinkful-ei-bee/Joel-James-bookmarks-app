@@ -11,7 +11,7 @@ const bookmarkList = (function() {
     <form>
      
       <div class="bookmark-title">
-        <p>${bookmark.title}</p>
+        <p><a href="${bookmark.url}">${bookmark.title}</a></p>
         
         <div class="form-group">
           <ul class="bookmark-rating">
@@ -111,6 +111,7 @@ const bookmarkList = (function() {
 
   // renderer:
   function render() {
+    // Filter on each call of render for the bookmarks we want
     let bookmarks = store.bookmarks.filter( bookmark => bookmark.rating <= store.filterRating );
 
     const html = generateBookmarkItems(bookmarks);
