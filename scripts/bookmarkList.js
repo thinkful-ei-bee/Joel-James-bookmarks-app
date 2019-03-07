@@ -4,46 +4,6 @@
 
 const bookmarkList = (function() {
 
-  function generateBookmarkElement(bookmark) {
-    
-    return `
-    <li data-item-id="${bookmark.id}">
-    <form>
-     
-      <div class="bookmark-title">
-        <p><a class="bookmark-title-link" href="${bookmark.url}">${bookmark.title}</a></p>
-        
-        <div class="form-group">
-          <ul class="bookmark-rating">
-            ${generateBookMarkElementRatingHelper(bookmark.rating)}
-          </ul>
-        </div>
-
-      </div>
-    </form>
-  </li>`;
-  }
-
-  function generateBookMarkElementRatingHelper(rating) {
-    let ratingList = [];
-    let count = 0;
-    for (let i = 0; i <= rating; i++) {
-      if(count >= rating) {
-        ratingList[i] = '<li><i class="far fa-star"></i></li>';
-      }
-      else {
-        ratingList[i] = '<li><i class="fas fa-star"></i></li>';
-      }
-      count++;
-    }
-    return ratingList.join('');
-  }
-
-  function generateBookmarkItems(bookmarkList) {
-    const bookmarks = store.bookmarks.map(bookmark => generateBookmarkElement(bookmark));
-    return bookmarks.join('');
-  }
-
   function generateAddBookmarkHTML() {
     return `
     <li>
@@ -94,22 +54,103 @@ const bookmarkList = (function() {
   </li>`;
   }
 
-  // function generateExpandedBookmarkHTML() {
+  function generateBookmarkElementExpanded(bookmark) {
+    return `
+    <li data-item-id="${bookmark.id}">
+      <form>
+        <p><a class="bookmark-title-link" href="${bookmark.url}">${bookmark.title}</a></p>
+        <div class="bookmark-title">
+
+          <div class="form-group">
+            <div class="col">
+                <label for="title">Title:</label>
+                <input id="title" type="text">
+            </div>
+            <div class="col">
+              <label for="url">Url:</label>
+              <input id="url" type="text">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col">
+                <label for="description">Description:</label><br>
+                <textarea id="description"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="col">
+              <a href="">Visit Site</a>
+            </div>
+            <div class="col">
+              <input type="submit" value="Delete">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <ul class="bookmark-rating">
+              ${generateBookMarkElementRatingHelper(bookmark.rating)}
+            </ul>
+          </div>
+
+        </div>
+      </form>
+    </li>`;
+  }
+
+  function generateBookmarkElement(bookmark) {  
+    return `
+    <li data-item-id="${bookmark.id}">
+      <form>
+      
+        <div class="bookmark-title">
+          <p><a class="bookmark-title-link" href="${bookmark.url}">${bookmark.title}</a></p>
+          
+          <div class="form-group">
+            <ul class="bookmark-rating">
+              ${generateBookMarkElementRatingHelper(bookmark.rating)}
+            </ul>
+          </div>
+
+        </div>
+      </form>
+    </li>`;
+  }
+
+  function generateBookMarkElementRatingHelper(rating) {
+    let ratingList = [];
+    let count = 0;
+    for (let i = 0; i <= rating; i++) {
+      if(count >= rating) {
+        ratingList[i] = '<li><i class="far fa-star"></i></li>';
+      }
+      else {
+        ratingList[i] = '<li><i class="fas fa-star"></i></li>';
+      }
+      count++;
+    }
+    return ratingList.join('');
+  }
+
+  function generateBookmarkItems() {
+    const bookmarks = [];
     
-  // }
+    store.bookmarks.forEach(bookmark => {
+      if(bookmark.expanded === true) {
+        bookmarks.push(generateBookmarkElementExpanded(bookmark));
+      }
 
-  // function  generateBookmarks(list) {
-  //   const bookmarks = list.map( function(bookmark) {
-  //     if (bookmark.expand === true) {
-  //       return generateExpandedBookmarkHTML(bookmark);
-  //     } else {
-  //       return generateBookmarkHTML(bookmark);
-  //     }
-  //   });
-  //   return bookmarks.join('');
-  // }
+      if(bookmark.expanded !== true) {
+        bookmarks.push(generateBookmarkElement(bookmark));
+      }
+    });
 
-  // renderer:
+    return bookmarks;
+  }
+
+  
+
   function render() {
     // Filter on each call of render for the bookmarks we want
     let bookmarks = store.bookmarks.filter( bookmark => bookmark.rating <= store.filterRating );
@@ -161,7 +202,8 @@ const bookmarkList = (function() {
     $('#bookmarks-list').on('click', '.bookmark-title-link', event => {
       event.preventDefault();
       const id = getItemIdFromElement(event.target);
-      console.log(id);
+      store.setBookmarkExpanded(id);
+      render();
     });
   }
  

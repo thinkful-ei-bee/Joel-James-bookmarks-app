@@ -12,7 +12,7 @@ const store = (function(){
         'rating':       bookmark.rating,
         'url':          bookmark.url,
         'description':  bookmark.desc,
-        'exanded':      false,
+        'expanded':     false,
       }
     );
   };
@@ -34,10 +34,9 @@ const store = (function(){
     console.log('toggleFilterRating() says hello and wants you to finish coding it !!!')
   };
 
-  const setBookmarkExpand = function(id, isExpanded) {
+  const setBookmarkExpanded = function(id) {
     const bookmark = this.findById(id);
-    // set isExpanded to true to expand bookmark
-    bookmark.isExpanded = isExpanded;
+    bookmark.expanded = true;
   };
 
   return {
@@ -48,7 +47,7 @@ const store = (function(){
     findAndUpdate,
     findAndDelete,
     toggleFilterRating,
-    setBookmarkExpand,
+    setBookmarkExpanded,
     filterRating: 4,
   };
 
