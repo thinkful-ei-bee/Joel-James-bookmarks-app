@@ -35,7 +35,7 @@ const store = (function(){
   };
 
   const setBookmarkExpanded = function(id) {
-    const bookmark = this.findById(id);
+    let bookmark = this.findById(id);
     bookmark.expanded = true;
   };
 

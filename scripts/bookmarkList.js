@@ -59,7 +59,7 @@ const bookmarkList = (function() {
     <li data-item-id="${bookmark.id}">
       <form>
 
-        <p>${bookmark.title}<p>
+        <p><a class="bookmark-title-link" href="">${bookmark.title}</a><p>
 
         <div class="form-group">
           <div class="col">
@@ -188,7 +188,7 @@ const bookmarkList = (function() {
   function handleExpandBookmark() {
     $('#bookmarks-list').on('click', '.bookmark-title-link', event => {
       event.preventDefault();
-      const id = getItemIdFromElement(event.target);
+      let id = getItemIdFromElement(event.target);
       store.setBookmarkExpanded(id);
       render();
     });
