@@ -164,16 +164,17 @@ const bookmarkList = (function() {
   }
   
   function handleSaveBookmark() {
-    $('#bookmarks-list').on('click', '#create-bookmark-save', (event) => {
+    $('#bookmarks-add').on('click', '#create-bookmark-save', (event) => {
       event.preventDefault();
       console.log('hi');
     });
   }
   
   function handleCancelBookmark() {
-    $('#bookmarks-list').on('click', '#create-bookmark-cancel', event => {
+    $('#bookmarks-add').on('click', '#create-bookmark-cancel', event => {
       event.preventDefault();
       store.addBookmark = false;
+
     });
   }
   
@@ -203,8 +204,8 @@ const bookmarkList = (function() {
   return {
     generateBookmarkElement,
     generateBookmarkItems,
-    render: render,
-    bindEventListeners: bindEventListeners,
+    render,
+    bindEventListeners,
   };
 
 }());
