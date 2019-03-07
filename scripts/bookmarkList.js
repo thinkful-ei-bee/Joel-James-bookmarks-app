@@ -60,17 +60,14 @@ const bookmarkList = (function() {
       <form>
 
         <p><a class="bookmark-title-link" href="">${bookmark.title}</a><p>
-
-        <div class="form-group">
-          <div class="col">
-              <label for="description">Description:</label><br>
-              <textarea id="description"></textarea>
-          </div>
+        
+        <div class="col">
+          <p>${bookmark.description}</p>
         </div>
-
+        
         <div class="form-group">
           <div class="col">
-          <a href="${bookmark.url}" target="_blank">Vist site</a>
+            <a href="${bookmark.url}" target="_blank">Vist site</a>
           </div>
           <div class="col">
             <input type="submit" value="Delete">
@@ -84,7 +81,8 @@ const bookmarkList = (function() {
         </div>
 
       </form>
-    </li>`;
+    </li>
+    <hr>`;
   }
 
   function generateBookmarkElement(bookmark) {  
