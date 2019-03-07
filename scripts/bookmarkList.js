@@ -70,7 +70,7 @@ const bookmarkList = (function() {
 
         <div class="form-group">
           <div class="col">
-          <a class="bookmark-title-link" href="${bookmark.url}">Vist site</a>
+          <a href="${bookmark.url}" target="_blank">Vist site</a>
           </div>
           <div class="col">
             <input type="submit" value="Delete">
@@ -124,11 +124,11 @@ const bookmarkList = (function() {
     const bookmarks = [];
     
     store.bookmarks.forEach(bookmark => {
-      if(bookmark.expanded === true) {
+      if(bookmark.id === store.expanded) {
         bookmarks.push(generateBookmarkElementExpanded(bookmark));
       }
 
-      if(bookmark.expanded !== true) {
+      if(bookmark.id !== store.expanded) {
         bookmarks.push(generateBookmarkElement(bookmark));
       }
     });

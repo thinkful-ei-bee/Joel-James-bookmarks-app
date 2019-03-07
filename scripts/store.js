@@ -12,7 +12,6 @@ const store = (function(){
         'rating':       bookmark.rating,
         'url':          bookmark.url,
         'description':  bookmark.desc,
-        'expanded':     false,
       }
     );
   };
@@ -35,8 +34,11 @@ const store = (function(){
   };
 
   const setBookmarkExpanded = function(id) {
-    let bookmark = this.findById(id);
-    bookmark.expanded = true;
+    // if(this.expanded === id){
+    //   this.expanded = null;
+    //   return;
+    // }
+    this.expanded = id;
   };
 
   return {
@@ -49,6 +51,7 @@ const store = (function(){
     toggleFilterRating,
     setBookmarkExpanded,
     filterRating: 4,
+    expanded: null,
   };
 
 }());
