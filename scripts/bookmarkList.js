@@ -11,7 +11,7 @@ const bookmarkList = (function() {
     <form>
      
       <div class="bookmark-title">
-        <p><a href="${bookmark.url}">${bookmark.title}</a></p>
+        <p><a class="bookmark-title-link" href="${bookmark.url}">${bookmark.title}</a></p>
         
         <div class="form-group">
           <ul class="bookmark-rating">
@@ -118,6 +118,10 @@ const bookmarkList = (function() {
     $('#bookmarks-list').html(html);
   }
 
+  function getItemIdFromElement(item) {
+    return $(item).closest('li').data('item-id');
+  }
+
   function handleAddBookmark() {
     $('#add-bookmark').click((event) => {
       event.preventDefault();
@@ -154,8 +158,13 @@ const bookmarkList = (function() {
   }
   
   function handleExpandBookmark() {
-    
+    $('#bookmarks-list').on('click', '.bookmark-title-link', event => {
+      event.preventDefault();
+      const id = getItemIdFromElement(event.target);
+      console.log(id);
+    });
   }
+ 
   
   function bindEventListeners() {
     handleAddBookmark();
