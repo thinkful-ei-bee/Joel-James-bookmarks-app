@@ -117,19 +117,20 @@ const bookmarkList = (function() {
     return ratingList.join('');
   }
 
-  function generateBookmarkItems(bookmarks) {
-    // console.log(bookmarks);
-    bookmarks.forEach(bookmark => {
+  function generateBookmarkItems(bookmarksPreRender) {
+    let bookmarksPostRender = [];
+    
+    bookmarksPreRender.forEach(bookmark => {
       if(bookmark.id === store.expanded) {
-        bookmarks.push(generateBookmarkElementExpanded(bookmark));
+        bookmarksPostRender.push(generateBookmarkElementExpanded(bookmark));
       }
 
       if(bookmark.id !== store.expanded) {
-        bookmarks.push(generateBookmarkElement(bookmark));
+        bookmarksPostRender.push(generateBookmarkElement(bookmark));
       }
     });
 
-    return bookmarks;
+    return bookmarksPostRender;
   }
 
   function render() {
@@ -139,13 +140,16 @@ const bookmarkList = (function() {
       //$('#errors').toggle();
       $('#error-message').text(store.error.message); 
     }
+    if(store.error === null) {
+      $('#errors').css('display', 'none');
+    }
 
     // Filter on each call of render for the bookmarks we want
     //store.filterRating = 5;
-    let bookmarks = store.bookmarks.filter( bookmark => bookmark.rating <= store.filterRating );
+    let bookmarksFiltered = store.bookmarks.filter( bookmark => bookmark.rating <= store.filterRating );
     
-    const html = generateBookmarkItems(bookmarks);
-    $('#bookmarks-list').html(html);
+    const bookmarksRendered = generateBookmarkItems(bookmarksFiltered);
+    $('#bookmarks-list').html(bookmarksRendered);
     
   }
 
