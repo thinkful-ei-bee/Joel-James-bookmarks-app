@@ -174,12 +174,17 @@ const bookmarkList = (function() {
     //$('#bookmarks-add').on('submit', '#bookmark-form-add', (event) => {
       event.preventDefault();
 
+      // Capture necessary data for new bookmark
       let title = $('#bookmark-title-add').val();
       let url = $('#bookmark-url-add').val();
       let description = $('#bookmark-description-add').val();
       let rating = $('input[name=rating]:checked').val();
 
+      // Get rid of bookmark add section
       $('#bookmarks-add').html('');
+
+      // Reset filter for proper render
+      $('#rating').val(store.filterRating);
 
       // with bookmark.id being handled API side, not sure how to handle store.addbookmark
       // besides doing a full round trip ??
@@ -192,11 +197,13 @@ const bookmarkList = (function() {
 
       // Create new bookmark
       api.createBookmark(title, url, description, rating);
-      api.getBookmarks().then(bookmarks => {
-        bookmarks.forEach(bookmark => store.addBookmark(bookmark));
-      });
-     
-      render();
+      // Get all bookmarks, regenerate everything
+      api.getBookmarks()
+        .then(bookmarks => {
+          bookmarks.forEach(bookmark => store.addBookmark(bookmark));
+        })
+        .then(() => generateBookmarkItems(store.bookmarks))
+        .then(() => render()); 
     });
   }
   

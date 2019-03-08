@@ -3,6 +3,7 @@
 /* global bookmarkList, store, api */
 
 function main() {
+  $('#rating').val(store.filterRating);
 
   // Get remote bookmarks
   api.getBookmarks()
