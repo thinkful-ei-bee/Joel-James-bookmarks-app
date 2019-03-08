@@ -170,8 +170,8 @@ const bookmarkList = (function() {
   }
   
   function handleSaveBookmark() {
-    // $('#bookmarks-add').on('click', '#create-bookmark-save', (event) => {
-    $('#bookmarks-add').on('submit', '#bookmark-form-add', (event) => {
+    $('#bookmarks-add').on('click', '#create-bookmark-save', (event) => {
+    //$('#bookmarks-add').on('submit', '#bookmark-form-add', (event) => {
       event.preventDefault();
 
       let title = $('#bookmark-title-add').val();
