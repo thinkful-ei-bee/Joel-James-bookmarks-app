@@ -55,6 +55,7 @@ const api = (function(){
         //console.log(data);
         if (error) {
           error.message = data.message;
+          store.error = error.message;
           return Promise.reject(error);
         }
 

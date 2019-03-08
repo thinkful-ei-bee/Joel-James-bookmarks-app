@@ -13,11 +13,11 @@ const bookmarkList = (function() {
         <div class="form-group">
           <div class="col">
               <label for="bookmark-title-add">Title:</label>
-              <input id="bookmark-title-add" type="text" value="Google">
+              <input id="bookmark-title-add" type="text">
           </div>
           <div class="col">
             <label for="bookmark-url-add">Url:</label>
-            <input id="bookmark-url-add" type="text" value="https://www.google.com">
+            <input id="bookmark-url-add" type="text">
           </div>
         </div>
 
@@ -138,11 +138,16 @@ const bookmarkList = (function() {
     if(store.error !== null) {
       $('#errors').css('display', 'block');
       //$('#errors').toggle();
-      $('#error-message').text(store.error.message); 
+      $('#error-message').text(store.error); 
     }
 
     if(store.error === null) {
       $('#errors').css('display', 'none');
+    }
+
+    if(store.showAdding) {
+      const newBookmarkHTML = generateAddBookmarkHTML();
+      $('#bookmarks-add').html(newBookmarkHTML);
     }
 
     // Filter on each call of render for the bookmarks we want
@@ -151,9 +156,6 @@ const bookmarkList = (function() {
     
     const bookmarksRendered = generateBookmarkItems(bookmarksFiltered);
     $('#bookmarks-list').html(bookmarksRendered);
-
-    // --
-    console.log('render ran');
   }
 
   function getItemIdFromElement(item) {
@@ -163,8 +165,7 @@ const bookmarkList = (function() {
   function handleAddBookmark() {
     $('#add-bookmark').click((event) => {
       event.preventDefault();
-      const newBookmarkHTML = generateAddBookmarkHTML();
-      $('#bookmarks-add').html(newBookmarkHTML);
+      store.showAdding = true;
       render();
     });
   }
@@ -178,7 +179,7 @@ const bookmarkList = (function() {
   
   function handleSaveBookmark() {
     $('#bookmarks-add').on('click', '#create-bookmark-save', (event) => {
-    //$('#bookmarks-add').on('submit', '#bookmark-form-add', (event) => {
+
       event.preventDefault();
 
       // Capture necessary data for new bookmark
@@ -195,10 +196,13 @@ const bookmarkList = (function() {
 
       // Create new bookmark
       api.createBookmark(title, url, description, rating)
-        //.then(response => console.log(response.id))
         .then(response => {
-          store.addBookmark(response.id, title, url, description, rating);
-          // or is this the problem ?!?!
+          store.addBookmark(response.id, title, url, rating, description);
+          store.showAdding = false;
+          render();
+        })
+        .catch(error => {
+          store.error = error.message;
           render();
         });
     });

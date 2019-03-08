@@ -33,6 +33,7 @@ const store = (function(){
     bookmarks: [],
     error: null,
     addBookmark,
+    showAdding: false,
     findById,
     findAndUpdate,
     findAndDelete,
