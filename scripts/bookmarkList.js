@@ -199,11 +199,13 @@ const bookmarkList = (function() {
         .then(response => {
           store.addBookmark(response.id, title, url, rating, description);
           store.showAdding = false;
+          store.error = null;
           render();
         })
         .catch(error => {
           store.error = error.message;
           render();
+          
         });
     });
   }
