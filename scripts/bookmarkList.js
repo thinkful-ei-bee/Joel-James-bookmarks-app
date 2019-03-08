@@ -6,18 +6,18 @@ const bookmarkList = (function() {
 
   function generateAddBookmarkHTML() {
     return `
-    <form>
+    <form id="bookmark-form-add">
       <p>Create a Bookmark</p>
       <div class="bookmark-title">
 
         <div class="form-group">
           <div class="col">
               <label for="bookmark-title-add">Title:</label>
-              <input id="bookmark-title-add" type="text">
+              <input id="bookmark-title-add" type="text" value="Google">
           </div>
           <div class="col">
             <label for="bookmark-url-add">Url:</label>
-            <input id="bookmark-url-add" type="text">
+            <input id="bookmark-url-add" type="text" value="https://www.google.com">
           </div>
         </div>
 
@@ -33,18 +33,18 @@ const bookmarkList = (function() {
             <input id="create-bookmark-save" type="submit" value="Save">
           </div>
           <div class="col">
-            <input id="create-bookmark-cancel" type="submit" value="Cancel">
+            <!-- <input id="create-bookmark-cancel" type="submit" value="Cancel"> -->
           </div>
         </div>
         
         <div class="form-group">
           <ul class="bookmark-rating">
             Rating:
-            <li><input type="radio" name="rating" value="" checked>1<br></li>
-            <li><input type="radio" name="rating" value="" checked>2<br></li>
-            <li><input type="radio" name="rating" value="" checked>3<br></li>
-            <li><input type="radio" name="rating" value="" checked>4<br></li>
-            <li><input type="radio" name="rating" value="" checked>5<br></li>
+            <li><input type="radio" name="rating" value="1" checked>1<br></li>
+            <li><input type="radio" name="rating" value="2" checked>2<br></li>
+            <li><input type="radio" name="rating" value="3" checked>3<br></li>
+            <li><input type="radio" name="rating" value="4" checked>4<br></li>
+            <li><input type="radio" name="rating" value="5" checked>5<br></li>
           </ul>
         </div>
 
@@ -157,8 +157,6 @@ const bookmarkList = (function() {
       event.preventDefault();
       const newBookmarkHTML = generateAddBookmarkHTML();
       $('#bookmarks-add').html(newBookmarkHTML);
-      // handleSaveBookmark();
-      // handleCancelBookmark();
       render();
     });
   }
@@ -171,12 +169,32 @@ const bookmarkList = (function() {
   }
   
   function handleSaveBookmark() {
-    $('#bookmarks-add').on('click', '#create-bookmark-save', (event) => {
+    // $('#bookmarks-add').on('click', '#create-bookmark-save', (event) => {
+    $('#bookmarks-add').on('submit', '#bookmark-form-add', (event) => {
       event.preventDefault();
+
       let title = $('#bookmark-title-add').val();
       let url = $('#bookmark-url-add').val();
       let description = $('#bookmark-description-add').val();
-      api.createBookmark(title, url, description);
+      let rating = $('input[name=rating]:checked').val();
+
+      $('#bookmarks-add').html('');
+
+      // with bookmark.id being handled API side, not sure how to handle store.addbookmark
+      // besides doing a full round trip ??
+
+      // Completely wipe all bookmarks from both store and api
+      store.bookmarks = [];
+      // api.getBookmarks().then(bookmarks => {
+      //   bookmarks.forEach(bookmark => api.deleteBookmark(bookmark.id));
+      // });
+
+      // Create new bookmark
+      api.createBookmark(title, url, description, rating);
+      api.getBookmarks().then(bookmarks => {
+        bookmarks.forEach(bookmark => store.addBookmark(bookmark));
+      });
+     
       render();
     });
   }

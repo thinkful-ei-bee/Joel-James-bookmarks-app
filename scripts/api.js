@@ -9,7 +9,7 @@ const api = (function(){
     return bookmarkApiFetch(`${baseUrl}/bookmarks`);
   }
   
-  function createBookmark(title, url, desc, rating) {
+  function createBookmark(title, url, desc = '', rating = 1) {
     // console.log(JSON.stringify({ title, url, desc, rating }));
     return bookmarkApiFetch(`${baseUrl}/bookmarks`,
       {
@@ -18,7 +18,7 @@ const api = (function(){
           {
             'Content-Type': 'application/json',
           },
-        body: JSON.stringify({ title, url }),
+        body: JSON.stringify({ title, url, desc, rating }),
       });
   }
 
