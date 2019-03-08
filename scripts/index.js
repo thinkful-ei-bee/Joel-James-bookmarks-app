@@ -4,10 +4,6 @@
 
 function main() {
 
-  console.log('derp');
-
-  bookmarkList.bindEventListeners();
-
   // Get remote bookmarks
   api.getBookmarks()
     .then((bookmarks) => {
@@ -21,7 +17,7 @@ function main() {
       // Take data return from API and transform to HTML
       bookmarkList.generateBookmarkItems(store.bookmarks);
 
-      //
+      // Render
       bookmarkList.render();
 
     });
