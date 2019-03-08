@@ -134,12 +134,13 @@ const bookmarkList = (function() {
   }
 
   function render() {
-    $('#bookmarks-list').html('');
+   
     if(store.error !== null) {
       $('#errors').css('display', 'block');
       //$('#errors').toggle();
       $('#error-message').text(store.error.message); 
     }
+
     if(store.error === null) {
       $('#errors').css('display', 'none');
     }
@@ -150,7 +151,9 @@ const bookmarkList = (function() {
     
     const bookmarksRendered = generateBookmarkItems(bookmarksFiltered);
     $('#bookmarks-list').html(bookmarksRendered);
-    
+
+    // --
+    console.log('render ran');
   }
 
   function getItemIdFromElement(item) {
@@ -192,11 +195,12 @@ const bookmarkList = (function() {
 
       // Create new bookmark
       api.createBookmark(title, url, description, rating)
-        .then(response => console.log(response))
+        //.then(response => console.log(response.id))
         .then(response => {
-          store.addBookmark(response.id, response.title,response.url, response.desc, response.rating);
-        })
-        .then(() => render());
+          store.addBookmark(response.id, title, url, description, rating);
+          // or is this the problem ?!?!
+          render();
+        });
     });
   }
   

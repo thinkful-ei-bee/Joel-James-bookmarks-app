@@ -3,10 +3,11 @@
 /* global store */
 
 const store = (function(){
-  let bookmarks = [];
+  //let bookmarks = [];
   // response.id, response.title,response.url, response.desc, response.rating
   const addBookmark = function(id, title, url, rating = 5, description = '') {
     this.bookmarks.push({ id, title, url, rating, description, });
+    //console.log(this.bookmarks);
   };
 
   const findById = function(id) {
@@ -29,7 +30,7 @@ const store = (function(){
   };
 
   return {
-    bookmarks,
+    bookmarks: [],
     error: null,
     addBookmark,
     findById,
