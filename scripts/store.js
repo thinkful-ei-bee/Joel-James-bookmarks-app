@@ -1,19 +1,12 @@
 'use strict';
 
-/* global bookmarks */
+/* global store */
 
 const store = (function(){
-
-  const addBookmark = function(bookmark) {
-    this.bookmarks.push(
-      {
-        'id':           bookmark.id,
-        'title':        bookmark.title,
-        'rating':       bookmark.rating,
-        'url':          bookmark.url,
-        'description':  bookmark.desc,
-      }
-    );
+  let bookmarks = [];
+  // response.id, response.title,response.url, response.desc, response.rating
+  const addBookmark = function(id, title, url, rating = 5, description = '') {
+    this.bookmarks.push({ id, title, url, rating, description, });
   };
 
   const findById = function(id) {
@@ -28,11 +21,6 @@ const store = (function(){
     this.bookmarks = this.bookmarks.filter(bookmark => bookmark.id !== id);
   };
 
-  const toggleFilterRating = function(rating) {
-    // filter bookmarks based on rating
-    console.log('toggleFilterRating() says hello and wants you to finish coding it !!!')
-  };
-
   const setBookmarkExpanded = function(id) {
    
     this.expanded = id;
@@ -41,13 +29,12 @@ const store = (function(){
   };
 
   return {
-    bookmarks: [],
+    bookmarks,
     error: null,
     addBookmark,
     findById,
     findAndUpdate,
     findAndDelete,
-    toggleFilterRating,
     setBookmarkExpanded,
     filterRating: 5,
     expanded: null,

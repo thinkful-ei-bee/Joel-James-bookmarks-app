@@ -190,24 +190,13 @@ const bookmarkList = (function() {
       // Reset filter for proper render
       $('#rating').val(store.filterRating);
 
-      // with bookmark.id being handled API side, not sure how to handle store.addbookmark
-      // besides doing a full round trip ??
-
-      // Completely wipe all bookmarks from both store and api
-      store.bookmarks = [];
-      // api.getBookmarks().then(bookmarks => {
-      //   bookmarks.forEach(bookmark => api.deleteBookmark(bookmark.id));
-      // });
-
       // Create new bookmark
-      api.createBookmark(title, url, description, rating);
-      // Get all bookmarks, regenerate everything
-      api.getBookmarks()
-        .then(bookmarks => {
-          bookmarks.forEach(bookmark => store.addBookmark(bookmark));
+      api.createBookmark(title, url, description, rating)
+        .then(response => console.log(response))
+        .then(response => {
+          store.addBookmark(response.id, response.title,response.url, response.desc, response.rating);
         })
-        .then(() => generateBookmarkItems(store.bookmarks))
-        .then(() => render()); 
+        .then(() => render());
     });
   }
   

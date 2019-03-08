@@ -41,7 +41,6 @@ const api = (function(){
       });
   } 
 
-
   function bookmarkApiFetch(...args) {
     let error;
     return fetch(...args)

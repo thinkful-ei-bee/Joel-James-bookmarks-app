@@ -9,8 +9,15 @@ function main() {
   api.getBookmarks()
     .then((bookmarks) => {
 
-      // Update local store.bookmarks array with remote values 
-      bookmarks.forEach(bookmark => store.addBookmark(bookmark));
+      // Update local store.bookmarks array with remote values
+      // id, title, url, rating = 5, description = '' 
+      bookmarks.forEach(bookmark => store.addBookmark(
+        bookmark.id, 
+        bookmark.title,
+        bookmark.url,
+        bookmark.rating,
+        bookmark.desc
+      ));
 
       // Listen for clicks
       bookmarkList.bindEventListeners();
