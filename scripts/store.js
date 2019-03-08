@@ -49,7 +49,7 @@ const store = (function(){
     findAndDelete,
     toggleFilterRating,
     setBookmarkExpanded,
-    filterRating: 4,
+    filterRating: 5,
     expanded: null,
   };
 

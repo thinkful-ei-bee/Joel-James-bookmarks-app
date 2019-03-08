@@ -33,7 +33,7 @@ const bookmarkList = (function() {
             <input id="create-bookmark-save" type="submit" value="Save">
           </div>
           <div class="col">
-            <!-- <input id="create-bookmark-cancel" type="submit" value="Cancel"> -->
+            <input id="create-bookmark-cancel" type="submit" value="Cancel">
           </div>
         </div>
         
@@ -117,10 +117,9 @@ const bookmarkList = (function() {
     return ratingList.join('');
   }
 
-  function generateBookmarkItems() {
-    const bookmarks = [];
-    
-    store.bookmarks.forEach(bookmark => {
+  function generateBookmarkItems(bookmarks) {
+    // console.log(bookmarks);
+    bookmarks.forEach(bookmark => {
       if(bookmark.id === store.expanded) {
         bookmarks.push(generateBookmarkElementExpanded(bookmark));
       }
@@ -134,6 +133,7 @@ const bookmarkList = (function() {
   }
 
   function render() {
+    $('#bookmarks-list').html('');
     if(store.error !== null) {
       $('#errors').css('display', 'block');
       //$('#errors').toggle();
@@ -141,8 +141,9 @@ const bookmarkList = (function() {
     }
 
     // Filter on each call of render for the bookmarks we want
+    //store.filterRating = 5;
     let bookmarks = store.bookmarks.filter( bookmark => bookmark.rating <= store.filterRating );
-
+    
     const html = generateBookmarkItems(bookmarks);
     $('#bookmarks-list').html(html);
     
@@ -163,7 +164,7 @@ const bookmarkList = (function() {
   
   function handleMinRating() {
     $('#rating').change(() => {
-      store.filterRating = $('#rating').val();
+      store.filterRating = parseInt($('#rating').val());
       render();
     });
   }
