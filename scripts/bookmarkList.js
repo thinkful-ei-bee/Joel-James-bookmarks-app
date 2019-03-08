@@ -1,6 +1,6 @@
 'use strict';
 
-/* global store */
+/* global store, api*/
 
 const bookmarkList = (function() {
 
@@ -13,11 +13,11 @@ const bookmarkList = (function() {
         <div class="form-group">
           <div class="col">
               <label for="bookmark-title-add">Title:</label>
-              <input id="bookmark-title-add" type="text">
+              <input id="bookmark-title-add" type="text" value="testerin">
           </div>
           <div class="col">
             <label for="bookmark-url-add">Url:</label>
-            <input id="bookmark-url-add" type="text">
+            <input id="bookmark-url-add" type="text" value="http://testerin.com">
           </div>
         </div>
 
@@ -134,6 +134,12 @@ const bookmarkList = (function() {
   }
 
   function render() {
+    if(store.error !== null) {
+      $('#errors').css('display', 'block');
+      //$('#errors').toggle();
+      $('#error-message').text(store.error.message); 
+    }
+
     // Filter on each call of render for the bookmarks we want
     let bookmarks = store.bookmarks.filter( bookmark => bookmark.rating <= store.filterRating );
 
@@ -153,6 +159,7 @@ const bookmarkList = (function() {
       $('#bookmarks-add').html(newBookmarkHTML);
       // handleSaveBookmark();
       // handleCancelBookmark();
+      render();
     });
   }
   
@@ -170,6 +177,8 @@ const bookmarkList = (function() {
       let url = $('#bookmark-url-add').val();
       let description = $('#bookmark-description-add').val();
       console.log(` ${title} ${url} ${description} `);
+      api.createBookmark(title, url, description);
+      
     });
   }
   

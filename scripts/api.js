@@ -9,27 +9,28 @@ const api = (function(){
     return bookmarkApiFetch(`${baseUrl}/bookmarks`);
   }
   
-  function createBookmark(name) {
-    return bookmarkApiFetch(`${baseUrl}/items`,
+  function createBookmark(title, url, desc, rating) {
+    // console.log(JSON.stringify({ title, url, desc, rating }));
+    return bookmarkApiFetch(`${baseUrl}/bookmarks`,
       {
         method: 'POST',
         headers:
           {
             'Content-Type': 'application/json',
           },
-        body: JSON.stringify({ name }),
+        body: JSON.stringify({ title, url }),
       });
   }
 
   function deleteBookmark(id) {
-    return bookmarkApiFetch(`${baseUrl}/items/${id}`, 
+    return bookmarkApiFetch(`${baseUrl}/bookmarks/${id}`, 
       {
         method: 'DELETE',
       });
   }
 
   function updateBookmark(id, updateData) {
-    return bookmarkApiFetch(`${baseUrl}/items/${id}`,
+    return bookmarkApiFetch(`${baseUrl}/bookmarks/${id}`,
       {
         method: 'PATCH',
         headers:
