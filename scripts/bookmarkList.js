@@ -55,7 +55,7 @@ const bookmarkList = (function() {
   function generateBookmarkElementExpanded(bookmark) {
     return `
     <li data-item-id="${bookmark.id}">
-      <form>
+      <form id="expanded-bookmark-form">
 
         <p><a class="bookmark-title-link" href="">${bookmark.title}</a><p>
 
@@ -68,7 +68,7 @@ const bookmarkList = (function() {
             <a href="${bookmark.url}" target="_blank">Vist site</a>
           </div>
           <div class="col">
-            <input type="submit" value="Delete">
+            <a href="#" class="expanded-bookmark-delete">Delete</a>
           </div>
         </div>
         
@@ -189,8 +189,15 @@ const bookmarkList = (function() {
     });
   }
   
+  //expanded-bookmark-delete
   function handleDeleteBookmark() {
-  
+    $('#bookmarks-list').on('click', '.expanded-bookmark-delete', event => {
+      event.preventDefault();
+      let id = getItemIdFromElement(event.target);
+      store.findAndDelete(id);
+      api.deleteBookmark(id);
+      render();
+    });
   }
   
   function handleExpandBookmark() {
